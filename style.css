@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart GST Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <h1 class="header-title">Smart GST Calculator</h1>
+        <div class="header-controls">
+            <button id="mode-toggle" class="mode-toggle-btn">🌙</button>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="calculator-card">
+            <div class="toggle-switch-container">
+                <button id="exclusive-btn" class="toggle-btn active">Exclusive GST</button>
+                <button id="inclusive-btn" class="toggle-btn">Inclusive GST</button>
+            </div>
+
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="base-amount">Base Amount</label>
+                    <input type="number" id="base-amount" placeholder="Enter Amount" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" value="1" min="1" required>
+                </div>
+            </div>
+
+            <div class="gst-rate-section">
+                <label>GST Rate (%)</label>
+                <div class="gst-rate-buttons">
+                    <button class="rate-btn" data-rate="5">5%</button>
+                    <button class="rate-btn" data-rate="12">12%</button>
+                    <button class="rate-btn" data-rate="18">18%</button>
+                    <button class="rate-btn" data-rate="28">28%</button>
+                    <input type="number" id="custom-rate" placeholder="Custom %" min="0" max="50">
+                </div>
+            </div>
+
+            <div class="round-off-section">
+                <label>Round Off</label>
+                <div class="round-off-options">
+                    <button id="round-2-dec" class="round-btn active">2 Decimals</button>
+                    <button id="round-rupee" class="round-btn">Nearest Rupee</button>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <div class="result-box">
+                    <span class="result-label">GST Amount</span>
+                    <span class="result-value green-text" id="gst-amount">0.00</span>
+                </div>
+                <div class="result-box">
+                    <span class="result-label">Total Price</span>
+                    <span class="result-value bold-text" id="total-price">0.00</span>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="print-btn" class="action-btn print">🖨️ Print</button>
+                <button id="save-btn" class="action-btn save">💾 Save</button>
+            </div>
+        </div>
+
+        <div class="history-card">
+            <h2>Recent Calculations</h2>
+            <div id="history-list" class="history-list">
+                <p class="no-history-msg">No history found.</p>
+            </div>
+            <button id="clear-history-btn" class="clear-history-btn">Clear History</button>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Smart GST Calculator. All Rights Reserved.</p>
+    </footer>
+
+    <div id="print-invoice" style="display: none;">
+        <div class="invoice-container">
+            <h2 class="invoice-title">Tax Invoice</h2>
+            <div class="invoice-header">
+                <div class="company-details">
+                    <p><strong>Company:</strong> <span id="invoice-company">My Company</span></p>
+                    <p><strong>GSTIN:</strong> <span id="invoice-gstin">12ABCDE1234F1Z5</span></p>
+                </div>
+                <div class="invoice-meta">
+                    <p><strong>Date:</strong> <span id="invoice-date"></span></p>
+                    <p><strong>Customer:</strong> <span id="invoice-customer"></span></p>
+                </div>
+            </div>
+            <div class="invoice-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Base Price</th>
+                            <th>GST Rate</th>
+                            <th>GST Amount</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="invoice-item-row">
+                            <td>Item(s)</td>
+                            <td id="invoice-base"></td>
+                            <td id="invoice-rate"></td>
+                            <td id="invoice-gst"></td>
+                            <td id="invoice-total"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="invoice-summary">
+                <p><strong>Total GST:</strong> <span id="invoice-total-gst"></span></p>
+                <p><strong>Grand Total:</strong> <span id="invoice-grand-total"></span></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
